@@ -54,8 +54,8 @@ class _StatusScreenState extends State<StatusScreen> {
       return;
     }
     try {
-      if (Platform.isAndroid && (await _plugin.isPermissionGranted(_tree) ?? false)) {
-        final files = await _plugin.listFiles(_tree);
+      if (Platform.isAndroid && (await _plugin.hasPermission(_tree) ?? false)) {
+        final files = await _plugin.list(_tree);
         setState(() {
           _items = files.map((f) => f.uri).where((u) {
             final l = u.toLowerCase();
@@ -225,3 +225,4 @@ class _StatusScreenState extends State<StatusScreen> {
     );
   }
 }
+
