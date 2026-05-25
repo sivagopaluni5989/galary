@@ -13,9 +13,11 @@ class StatusPermissionHelper {
     final info = await DeviceInfoPlugin().androidInfo;
     if (info.version.sdkInt >= 30) {
       try {
-        bool hasAccess = await _plugin.isGranted(_tree) ?? false;
+        // ✅ Corrected for v2.0.0: isPermissionGranted
+        bool hasAccess = await _plugin.isPermissionGranted(_tree) ?? false;
         if (!hasAccess) {
-          String? selected = await _plugin.openDirectory(initialUri: _tree);
+          // ✅ Corrected for v2.0.0: openDocumentTree
+          String? selected = await _plugin.openDocumentTree(initialUri: _tree);
           return selected != null;
         }
         return true;
